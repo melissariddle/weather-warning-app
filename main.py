@@ -24,7 +24,16 @@ class MainPage(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/plain'
         self.response.write('Hello, World!')
 
+class ManyDogPage(webapp2.RequestHandler):
+    def get(self, number):
+        self.response.headers['Content-Type'] = 'text/plain'
+        L = []
+        for i in range(int(number)):
+        	L.append('{}: Woof, woof, woof!\n'.format(i))
+        s = ''.join(L)
+        self.response.write(s)
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
+    ('/dog/(\d+)', dog)
 ], debug=True)
